@@ -6,7 +6,7 @@ from .forms import NewUserForm, UserForm
 from django.contrib import messages #import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from alumnidata.models import Profile
+from alumnidata.models import Profile, fieldstudy
 
 # Create your views here.
 def index(request):
@@ -52,6 +52,14 @@ def logout_request(request):
 	return redirect("/")
 
 def userpage(request, id):
+	uproflie = Profile.objects.get(user=request.user)
+
+	context = {
+		'user': request.user,
+		'profile': uproflie,
+		'user_id': request.user.id,
+	}
+
 	if request.method == "POST":
 		user_form = UserForm(request.POST, instance=request.user)
 
@@ -59,7 +67,7 @@ def userpage(request, id):
 			user_form.save()
 			messages.success(request,('Your profile was successfully updated!'))
 		else:
-			messages.error(request,('Unable to complete request'))
+			messages.error(request,('Unable to complete request here'))
 			return redirect (f"/user/{request.user.id}/")
 
 		if 'role' in request.POST:
@@ -70,25 +78,49 @@ def userpage(request, id):
 		else:
 			messages.error(request,('Unable to update role'))
 			return redirect (f"/user/{request.user.id}/")
-
-		if 'studyField' in request.POST:
-			studyField = request.POST['studyField']
-			major = request.POST['major']
-			minor = request.POST['minor']
-			start = request.POST['start']
-			stop = request.POST['stop']
-			gpa = request.POST['gpa']
-		elif not 'studyField' in request.POST:
-			pass 
-		else:
-			messages.error(request,('Unable to update Education 1'))
-			return redirect (f"/user/{request.user.id}/")
 	
+	return render(request, 'userpage.htm', context)
+
+def fieldstudy_page(request, id):
 	uproflie = Profile.objects.get(user=request.user)
 
 	context = {
-		'user': request.user,
 		'profile': uproflie,
-		'user_id': request.user.id,
+		'user_id': request.user.id
 	}
-	return render(request, 'userpage.htm', context)
+
+	if request.method == "POST":
+		studyField = request.POST['studyField']
+		major = request.POST['major']
+		minor = request.POST['minor']
+		start = request.POST['start']
+		stop = request.POST['stop']
+		gpa = request.POST['gpa']
+
+		if fieldstudy.objects.filter(alumniuser=uproflie).count() == 0:
+			fofstudy = fieldstudy.objects.create(alumniuser=uproflie)
+			fofstudy.studyField = studyField
+			fofstudy.studyMajor = major
+			fofstudy.studyMinor = minor
+			fofstudy.yearStart = start
+			fofstudy.yearGraduate = stop
+			fofstudy.gpa = gpa
+			fofstudy.save()
+			messages.success(request,('Your data was successfully updated!'))
+
+		elif fieldstudy.objects.filter(alumniuser=uproflie).count() != 0:
+			fofstudy = fieldstudy.objects.get(alumniuser=uproflie)
+			fofstudy.studyField = studyField
+			fofstudy.studyMajor = major
+			fofstudy.studyMinor = minor
+			fofstudy.yearStart = start
+			fofstudy.yearGraduate = stop
+			fofstudy.gpa = gpa
+			fofstudy.save()
+			messages.success(request,('Your data was successfully updated!'))
+		
+		else:
+			messages.error(request,('Unable to update your data'))
+			return redirect (f"/fofs/{request.user.id}/")
+
+	return render(request, 'fieldstudy.htm', context)
