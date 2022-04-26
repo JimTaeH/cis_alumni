@@ -1,0 +1,140 @@
+{% extends 'base.htm' %}
+{% block section1 %}
+<section class="contact-us" id="signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 align-self-center">
+          <div class="row">
+            <div class="col-lg-12">
+                <form method="POST" id="bigform">
+                    {% csrf_token %}
+                    <input type="text" name="username" value="{{ user.username }}" maxlength="30" autofocus required id="id_username" placeholder="Username">
+                        
+                    <input type="text" name="first_name" value="{{ user.first_name }}" maxlength="150" id="id_first_name" placeholder="Firstname">
+                        
+                    <input type="text" name="last_name" value="{{ user.last_name }}" maxlength="150" id="id_last_name" placeholder="Lastname">
+                            
+                    <input type="email" name="email" value="{{ user.email }}" maxlength="254" required id="id_email" placeholder="Email Address">
+
+                    <select name="role">
+                        <option value="" disabled selected hidden> ระบุ Role ของท่าน </option>
+                        <option type="text" value="alumni"> ศิษย์เก่า </option>
+                        <option type="text" value="admin"> เจ้าหน้าที่ฝ่ายการนักศึกษา </option>
+                        <option type="text" value="assistant_dean"> รองคณบดีฝ่ายการนักศึกษา </option>
+                     </select>
+                    
+                    <button type="submit">Save Changes</button>
+                </form>
+                {% if profile.role == "alumni" %}
+                <br>
+                <h2 class="form-title"> ประวัติการศึกษา </h2>
+                <form method="POST" id="bigform">
+                  {% csrf_token %}
+                  <select name="studyField">
+                    <option value="" disabled selected hidden> ระบุสาขาวิชา </option>
+                    <option type="text" value="DSI"> วิทยาศาสตรบัณฑิต สาขาวิชาวิทยาศาสตร์และนวัตกรรมข้อมูล (DSI) </option>
+                    <option type="text" value="PPE-TP"> สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์ (PPE ท่าพระจันทร์) </option>
+                    <option type="text" value="PPE-LP"> สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์ (PPE ลำปาง) </option>
+                  </select>
+
+                  <input type="text" name="major" maxlength="30" autofocus required id="id_major" placeholder="ระบุวิชาเอก">
+                      
+                  <input type="text" name="minor" maxlength="150" id="id_minor" placeholder="ระบุวิชาโท">
+                      
+                  <input type="number" name="start" maxlength="150" id="id_start" placeholder="ปีที่เริ่มศึกษา">
+                          
+                  <input type="number" name="stop" maxlength="254" required id="id_stop" placeholder="ปีที่จบการศึกษา">
+
+                  <input type="number" step="any" name="gpa" maxlength="254" required id="id_gpa" placeholder="GPA ที่ได้">
+                  
+                  <button type="submit"> Save </button>
+              </form>
+              <br>
+                <h2 class="form-title"> ประวัติการทำงาน </h2>
+                <form method="POST" id="bigform">
+                  {% csrf_token %}
+                  <input type="text" name="organization" maxlength="30" autofocus required id="id_organization" placeholder="ชื่อองค์กร">
+                  
+                  <select name="organizationType">
+                    <option value="" disabled selected hidden> ประเภทองค์กร </option>
+                    <option type="text" value="alumni"> เอกชน </option>
+                    <option type="text" value="admin"> รัฐวิสาหกิจ </option>
+                    <option type="text" value="assistant_dean"> หน่วยงานภาครัฐ </option>
+                  </select>
+
+                  <input type="text" name="department" maxlength="30" autofocus required id="id_department" placeholder="แผนก/ฝ่าย">
+                      
+                  <input type="text" name="jobTitle" maxlength="150" id="id_jobTitle" placeholder="ตำแหน่ง">
+                      
+                  <textarea type="text" name="jobDesc" maxlength="255" id="id_jobDesc" placeholder="หน้าที่งาน (พอสังเขป)"></textarea>
+                  
+                  <button type="submit"> Save </button>
+              </form>
+              <br>
+                <h2 class="form-title"> ข้อมูลการเรียนต่อ </h2>
+                <form method="POST" id="bigform">
+                  {% csrf_token %}
+                  <select name="degree">
+                    <option value="" disabled selected hidden> ศึกษาต่อในระดับ </option>
+                    <option type="text" value="alumni"> ปริญญาตรี </option>
+                    <option type="text" value="admin"> ปริญญาโท </option>
+                    <option type="text" value="assistant_dean"> ปริญญาเอก </option>
+                  </select>
+
+                  <input type="text" name="university" maxlength="30" autofocus required id="id_university" placeholder="ชื่อมหาวิทยาลัย">
+
+                  <input type="text" name="faculty" maxlength="30" autofocus required id="id_faculty" placeholder="สาขาวิชา">
+                      
+                  <input type="text" name="major" maxlength="150" id="id_major" placeholder="วิชาเอก">
+                      
+                  <input type="text" name="country" maxlength="255" id="id_country" placeholder="ศึกษาต่อที่ประเทศ">
+                  
+                  <button type="submit"> Save </button>
+              </form>
+              <br>
+                <h2 class="form-title"> ผลงานที่เคยทำ </h2>
+                <form method="POST" id="bigform">
+                  {% csrf_token %}
+
+                  <input type="text" name="title" maxlength="30" autofocus required id="id_title" placeholder="ชื่อผลงาน/รางวัล/อื่น ๆ">
+
+                  <input type="date" name="achievedate" maxlength="30" autofocus required id="id_achievedate" placeholder="วันที่ได้รับรางวัล/ปฏิบัติงาน">
+                      
+                  <textarea type="text" name="desc" maxlength="255" id="id_desc" placeholder="รายละเอียด (พอสังเขป)"></textarea>
+                  
+                  <button type="submit"> Save </button>
+              </form>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="right-info">
+            <ul>
+                <li>
+                  <h6>Welcome</h6>
+                  <span> {{user.username}} </span>
+                </li>
+                <br>
+                <li>
+                  <h6> Fullname </h6>
+                  <span> {{user.first_name}} {{user.last_name}} </span>
+                </li>
+                <br>
+                <li>
+                  <h6> Role </h6>
+                  <span> {{profile.role}} </span>
+                </li>
+
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <p>Copyright © 2022 Edu Meeting Co., Ltd. All Rights Reserved. 
+          <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
+    </div>
+</section>
+{% endblock %}
