@@ -1,0 +1,62 @@
+{% extends 'base.htm' %}
+{% block section1 %}
+<section class="contact-us" id="signup">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 align-self-center">
+          <div class="row">
+            <div class="col-lg-12">
+                <form method="POST" id="bigform">
+                  {% csrf_token %}
+                  <select name="studyField">
+                    <option value="" disabled selected hidden> ระบุสาขาวิชา </option>
+                    <option type="text" value="DSI"> วิทยาศาสตรบัณฑิต สาขาวิชาวิทยาศาสตร์และนวัตกรรมข้อมูล (DSI) </option>
+                    <option type="text" value="PPE-TP"> สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์ (PPE ท่าพระจันทร์) </option>
+                    <option type="text" value="PPE-LP"> สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์ (PPE ลำปาง) </option>
+                  </select>
+
+                  <input type="text" name="major" maxlength="30" autofocus required id="id_major" placeholder="ระบุวิชาเอก">
+                      
+                  <input type="text" name="minor" maxlength="150" id="id_minor" placeholder="ระบุวิชาโท">
+                      
+                  <input type="number" name="start" maxlength="150" id="id_start" placeholder="ปีที่เริ่มศึกษา">
+                          
+                  <input type="number" name="stop" maxlength="254" required id="id_stop" placeholder="ปีที่จบการศึกษา">
+
+                  <input type="number" step="any" name="gpa" maxlength="254" required id="id_gpa" placeholder="GPA ที่ได้">
+                  
+                  <button type="submit"> Save </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="right-info">
+            <ul>
+                <li>
+                  <h6>Welcome</h6>
+                  <span> {{user.username}} </span>
+                </li>
+                <br>
+                <li>
+                  <h6> Fullname </h6>
+                  <span> {{user.first_name}} {{user.last_name}} </span>
+                </li>
+                <br>
+                <li>
+                  <h6> Role </h6>
+                  <span> {{profile.role}} </span>
+                </li>
+
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <p>Copyright © 2022 Edu Meeting Co., Ltd. All Rights Reserved. 
+          <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
+    </div>
+</section>
+{% endblock %}
