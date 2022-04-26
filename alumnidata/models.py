@@ -55,6 +55,7 @@ class assistantDean(models.Model):
         return str(self.assistantDeanName.user.first_name) + "," + str(self.assistantDeanName.user.last_name) + "," + str(self.assistantDeanName.role)
 
 class fieldstudy(models.Model):
+    alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
     studyFieldID = models.CharField(max_length=2, default="#", null=False)
     studyField = models.CharField(max_length=50, default="#")
     studyMajor = models.CharField(max_length=30, default="#")
@@ -65,6 +66,7 @@ class fieldstudy(models.Model):
     
 
 class job(models.Model):
+    alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
     organization = models.CharField(max_length=30, default="#")
     organizeType = models.CharField(max_length=10, default="#")
     department = models.CharField(max_length=20, default="#")
@@ -75,6 +77,7 @@ class job(models.Model):
         return str(self.organization) + "," + str(self.department) + "," + str(self.jobTitle)
 
 class education(models.Model):
+    alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
     universityID = models.CharField(max_length=10, default="#", null=False)
     degree = models.CharField(max_length=10, default="#")
     university = models.CharField(max_length=50, default="#")
@@ -86,6 +89,7 @@ class education(models.Model):
         return str(self.degree) + "," + str(self.university) + "," + str(self.faculty)
 
 class success(models.Model):
+    alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
     achieveTitle = models.CharField(max_length=50, default="#")
     desc = models.TextField(max_length=2000, default="#")
     achieveDate = models.DateField(max_length=10, default=date.today)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Profile, academicadmin, assistantDean, alumnidata,
+from .models import (Profile, academicadmin, assistantDean, alumnidata, 
                     fieldstudy, job, education, success)
 
 # Register your models here.
