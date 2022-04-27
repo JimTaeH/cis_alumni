@@ -6,7 +6,7 @@ from .forms import NewUserForm, UserForm
 from django.contrib import messages #import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from alumnidata.models import Profile, fieldstudy
+from alumnidata.models import Profile, fieldstudy, job, education, success
 
 # Create your views here.
 def index(request):
@@ -133,6 +133,37 @@ def job_page(request, id):
 		'user_id': request.user.id
 	}
 
+	if request.method == "POST":
+		organization = request.POST['organization']
+		organizationType = request.POST['organizationType']
+		department = request.POST['department']
+		jobTitle = request.POST['jobTitle']
+		jobDesc = request.POST['jobDesc']
+
+		if job.objects.filter(alumniuser=uproflie).count() == 0:
+			alumnijob = job.objects.create(alumniuser=uproflie)
+			alumnijob.organization = organization
+			alumnijob.organizeType = organizationType
+			alumnijob.department = department
+			alumnijob.jobTitle = jobTitle
+			alumnijob.jobDesc = jobDesc
+			alumnijob.save()
+			messages.success(request,('Your data was successfully updated!'))
+
+		elif job.objects.filter(alumniuser=uproflie).count() != 0:
+			alumnijob = job.objects.get(alumniuser=uproflie)
+			alumnijob.organization = organization
+			alumnijob.organizeType = organizationType
+			alumnijob.department = department
+			alumnijob.jobTitle = jobTitle
+			alumnijob.jobDesc = jobDesc
+			alumnijob.save()
+			messages.success(request,('Your data was successfully updated!'))
+		
+		else:
+			messages.error(request,('Unable to update your data'))
+			return redirect (f"/job/{request.user.id}/")
+
 	return render(request, 'job.htm', context)
 
 def education_page(request, id):
@@ -143,6 +174,37 @@ def education_page(request, id):
 		'user_id': request.user.id
 	}
 
+	if request.method == "POST":
+		degree = request.POST['degree']
+		university = request.POST['university']
+		faculty = request.POST['faculty']
+		major = request.POST['major']
+		country = request.POST['country']
+
+		if education.objects.filter(alumniuser=uproflie).count() == 0:
+			alumnieducation = education.objects.create(alumniuser=uproflie)
+			alumnieducation.degree = degree
+			alumnieducation.university = university
+			alumnieducation.faculty = faculty
+			alumnieducation.major = major
+			alumnieducation.country = country
+			alumnieducation.save()
+			messages.success(request,('Your data was successfully updated!'))
+
+		elif education.objects.filter(alumniuser=uproflie).count() != 0:
+			alumnieducation = education.objects.get(alumniuser=uproflie)
+			alumnieducation.degree = degree
+			alumnieducation.university = university
+			alumnieducation.faculty = faculty
+			alumnieducation.major = major
+			alumnieducation.country = country
+			alumnieducation.save()
+			messages.success(request,('Your data was successfully updated!'))
+		
+		else:
+			messages.error(request,('Unable to update your data'))
+			return redirect (f"/education/{request.user.id}/")
+
 	return render(request, 'education.htm', context)
 
 def achievement_page(request, id):
@@ -152,5 +214,30 @@ def achievement_page(request, id):
 		'profile': uproflie,
 		'user_id': request.user.id
 	}
+
+	if request.method == "POST":
+		title = request.POST['title']
+		achievedate = request.POST['achievedate']
+		desc = request.POST['desc']
+
+		if success.objects.filter(alumniuser=uproflie).count() == 0:
+			alumnisuccess = success.objects.create(alumniuser=uproflie)
+			alumnisuccess.title = title
+			alumnisuccess.achievedate = achievedate
+			alumnisuccess.desc = desc
+			alumnisuccess.save()
+			messages.success(request,('Your data was successfully updated!'))
+
+		elif success.objects.filter(alumniuser=uproflie).count() != 0:
+			alumnisuccess = success.objects.get(alumniuser=uproflie)
+			alumnisuccess.achieveTitle = title
+			alumnisuccess.achieveDate = achievedate
+			alumnisuccess.desc = desc
+			alumnisuccess.save()
+			messages.success(request,('Your data was successfully updated!'))
+		
+		else:
+			messages.error(request,('Unable to update your data'))
+			return redirect (f"/achievement/{request.user.id}/")
 
 	return render(request, 'achievement.htm', context)
