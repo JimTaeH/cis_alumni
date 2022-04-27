@@ -63,6 +63,9 @@ class fieldstudy(models.Model):
     yearStart = models.IntegerField(default=2543)
     yearGraduate = models.IntegerField(default=2547)
     gpa = models.FloatField(max_length=4, default=3.50)
+
+    def __str__(self):
+        return str(self.alumniuser.user.first_name) + ", " + str(self.studyField)
     
 
 class job(models.Model):

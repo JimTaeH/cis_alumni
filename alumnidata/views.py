@@ -124,3 +124,33 @@ def fieldstudy_page(request, id):
 			return redirect (f"/fofs/{request.user.id}/")
 
 	return render(request, 'fieldstudy.htm', context)
+
+def job_page(request, id):
+	uproflie = Profile.objects.get(user=request.user)
+
+	context = {
+		'profile': uproflie,
+		'user_id': request.user.id
+	}
+
+	return render(request, 'job.htm', context)
+
+def education_page(request, id):
+	uproflie = Profile.objects.get(user=request.user)
+
+	context = {
+		'profile': uproflie,
+		'user_id': request.user.id
+	}
+
+	return render(request, 'education.htm', context)
+
+def achievement_page(request, id):
+	uproflie = Profile.objects.get(user=request.user)
+
+	context = {
+		'profile': uproflie,
+		'user_id': request.user.id
+	}
+
+	return render(request, 'achievement.htm', context)

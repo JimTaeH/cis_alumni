@@ -9,22 +9,22 @@
 
                 <form method="POST" id="bigform">
                     {% csrf_token %}
-                    <input type="text" name="username" value="{{ user.username }}" maxlength="30" autofocus required id="id_username" placeholder="Username">
+                    <select name="degree">
+                      <option value="" disabled selected hidden> ศึกษาต่อในระดับ </option>
+                      <option type="text" value="alumni"> ปริญญาตรี </option>
+                      <option type="text" value="admin"> ปริญญาโท </option>
+                      <option type="text" value="assistant_dean"> ปริญญาเอก </option>
+                    </select>
+  
+                    <input type="text" name="university" maxlength="30" autofocus required id="id_university" placeholder="ชื่อมหาวิทยาลัย">
+  
+                    <input type="text" name="faculty" maxlength="30" autofocus required id="id_faculty" placeholder="สาขาวิชา">
                         
-                    <input type="text" name="first_name" value="{{ user.first_name }}" maxlength="150" id="id_first_name" placeholder="Firstname">
+                    <input type="text" name="major" maxlength="150" id="id_major" placeholder="วิชาเอก">
                         
-                    <input type="text" name="last_name" value="{{ user.last_name }}" maxlength="150" id="id_last_name" placeholder="Lastname">
-                            
-                    <input type="email" name="email" value="{{ user.email }}" maxlength="254" required id="id_email" placeholder="Email Address">
-
-                    <select name="role">
-                        <option value="" disabled selected hidden> ระบุ Role ของท่าน </option>
-                        <option type="text" value="alumni"> ศิษย์เก่า </option>
-                        <option type="text" value="admin"> เจ้าหน้าที่ฝ่ายการนักศึกษา </option>
-                        <option type="text" value="assistant_dean"> รองคณบดีฝ่ายการนักศึกษา </option>
-                     </select>
+                    <input type="text" name="country" maxlength="255" id="id_country" placeholder="ศึกษาต่อที่ประเทศ">
                     
-                    <button type="submit">Save Changes</button>
+                    <button type="submit"> Save </button>
                 </form>
 
             </div>
@@ -50,9 +50,9 @@
                 <br>
                 <li>
                   <h6> Update Data </h6>
+                  <span> <a href="/user/{{ user.id }}/"> แก้ไขโปรไฟล์ </a> </span><br>
                   <span> <a href="/fofs/{{ user.id }}/"> ประวัติการศึกษา </a> </span><br>
                   <span> <a href="/job/{{ user.id }}/"> ประวัติการทำงาน </a> </span><br>
-                  <span> <a href="/education/{{ user.id }}/"> การเรียนต่อ </a> </span><br>
                   <span> <a href="/achievement/{{ user.id }}/"> ผลงานที่เคยทำ </a> </span>
                 </li>
 
