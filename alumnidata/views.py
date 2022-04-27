@@ -84,9 +84,15 @@ def userpage(request, id):
 def fieldstudy_page(request, id):
 	uproflie = Profile.objects.get(user=request.user)
 
+	if fieldstudy.objects.filter(alumniuser=uproflie).count() != 0:
+		ufofs = fieldstudy.objects.get(alumniuser=uproflie)
+	else:
+		ufofs = None
+
 	context = {
 		'profile': uproflie,
-		'user_id': request.user.id
+		'user_id': request.user.id,
+		'ufofs': ufofs,
 	}
 
 	if request.method == "POST":
@@ -107,6 +113,7 @@ def fieldstudy_page(request, id):
 			fofstudy.gpa = gpa
 			fofstudy.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/fofs/{request.user.id}/")
 
 		elif fieldstudy.objects.filter(alumniuser=uproflie).count() != 0:
 			fofstudy = fieldstudy.objects.get(alumniuser=uproflie)
@@ -118,6 +125,7 @@ def fieldstudy_page(request, id):
 			fofstudy.gpa = gpa
 			fofstudy.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/fofs/{request.user.id}/")
 		
 		else:
 			messages.error(request,('Unable to update your data'))
@@ -128,9 +136,15 @@ def fieldstudy_page(request, id):
 def job_page(request, id):
 	uproflie = Profile.objects.get(user=request.user)
 
+	if job.objects.filter(alumniuser=uproflie).count() != 0:
+		ujob = job.objects.get(alumniuser=uproflie)
+	else:
+		ujob = None
+
 	context = {
 		'profile': uproflie,
-		'user_id': request.user.id
+		'user_id': request.user.id,
+		'ujob': ujob,
 	}
 
 	if request.method == "POST":
@@ -149,6 +163,7 @@ def job_page(request, id):
 			alumnijob.jobDesc = jobDesc
 			alumnijob.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/job/{request.user.id}/")
 
 		elif job.objects.filter(alumniuser=uproflie).count() != 0:
 			alumnijob = job.objects.get(alumniuser=uproflie)
@@ -159,6 +174,7 @@ def job_page(request, id):
 			alumnijob.jobDesc = jobDesc
 			alumnijob.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/job/{request.user.id}/")
 		
 		else:
 			messages.error(request,('Unable to update your data'))
@@ -169,9 +185,15 @@ def job_page(request, id):
 def education_page(request, id):
 	uproflie = Profile.objects.get(user=request.user)
 
+	if education.objects.filter(alumniuser=uproflie).count() != 0:
+		ueducation = education.objects.get(alumniuser=uproflie)
+	else:
+		ueducation = None
+
 	context = {
 		'profile': uproflie,
-		'user_id': request.user.id
+		'user_id': request.user.id,
+		'uedu': ueducation,
 	}
 
 	if request.method == "POST":
@@ -190,6 +212,7 @@ def education_page(request, id):
 			alumnieducation.country = country
 			alumnieducation.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/education/{request.user.id}/")
 
 		elif education.objects.filter(alumniuser=uproflie).count() != 0:
 			alumnieducation = education.objects.get(alumniuser=uproflie)
@@ -200,6 +223,7 @@ def education_page(request, id):
 			alumnieducation.country = country
 			alumnieducation.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/education/{request.user.id}/")
 		
 		else:
 			messages.error(request,('Unable to update your data'))
@@ -210,9 +234,15 @@ def education_page(request, id):
 def achievement_page(request, id):
 	uproflie = Profile.objects.get(user=request.user)
 
+	if success.objects.filter(alumniuser=uproflie).count() != 0:
+		usuccess = success.objects.get(alumniuser=uproflie)
+	else:
+		usuccess = None
+
 	context = {
 		'profile': uproflie,
-		'user_id': request.user.id
+		'user_id': request.user.id,
+		'usuccess': usuccess
 	}
 
 	if request.method == "POST":
@@ -227,6 +257,7 @@ def achievement_page(request, id):
 			alumnisuccess.desc = desc
 			alumnisuccess.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/achievement/{request.user.id}/")
 
 		elif success.objects.filter(alumniuser=uproflie).count() != 0:
 			alumnisuccess = success.objects.get(alumniuser=uproflie)
@@ -235,6 +266,7 @@ def achievement_page(request, id):
 			alumnisuccess.desc = desc
 			alumnisuccess.save()
 			messages.success(request,('Your data was successfully updated!'))
+			return redirect (f"/achievement/{request.user.id}/")
 		
 		else:
 			messages.error(request,('Unable to update your data'))
