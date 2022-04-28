@@ -56,7 +56,6 @@ class assistantDean(models.Model):
 
 class fieldstudy(models.Model):
     alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    studyFieldID = models.CharField(max_length=2, default="#", null=False)
     studyField = models.CharField(max_length=50, default="#")
     studyMajor = models.CharField(max_length=30, default="#")
     studyMinor = models.CharField(max_length=30, default="#")
@@ -81,7 +80,6 @@ class job(models.Model):
 
 class education(models.Model):
     alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    universityID = models.CharField(max_length=10, default="#", null=False)
     degree = models.CharField(max_length=10, default="#")
     university = models.CharField(max_length=50, default="#")
     faculty = models.CharField(max_length=50, default="#")
