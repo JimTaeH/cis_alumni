@@ -47,6 +47,7 @@
                   <h6> Role </h6>
                   <span> {{profile.role}} </span>
                 </li>
+                {% if profile.role == "alumni" %}
                 <br>
                 <li>
                   <h6> Update Data </h6>
@@ -55,6 +56,7 @@
                   <span> <a href="/education/{{ user.id }}/"> การเรียนต่อ </a> </span><br>
                   <span> <a href="/achievement/{{ user.id }}/"> ผลงานที่เคยทำ </a> </span>
                 </li>
+                {% endif %}
 
               </ul>
           </div>

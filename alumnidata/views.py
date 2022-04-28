@@ -66,6 +66,7 @@ def userpage(request, id):
 		if user_form.is_valid():
 			user_form.save()
 			messages.success(request,('Your profile was successfully updated!'))
+			
 		else:
 			messages.error(request,('Unable to complete request here'))
 			return redirect (f"/user/{request.user.id}/")
@@ -75,6 +76,7 @@ def userpage(request, id):
 			user_profile = Profile.objects.get(user=request.user)
 			user_profile.role = role
 			user_profile.save()
+			return redirect (f"/user/{request.user.id}/")
 		else:
 			messages.error(request,('Unable to update role'))
 			return redirect (f"/user/{request.user.id}/")
