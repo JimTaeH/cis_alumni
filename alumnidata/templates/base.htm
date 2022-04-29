@@ -10,7 +10,7 @@
 
     {% include 'messages.htm' %}
 
-    <title>CIS Alumni System</title>
+    <title>CIS TU - ระบบข้อมูลศิษย์เก่า</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -56,30 +56,30 @@
                   <nav class="main-nav">
                       <!-- ***** Logo Start ***** -->
                       <a href="/#top" class="logo">
-                          CIS TU - Alumni System
+                          ระบบศิษย์เก่า CIS TU
                       </a>
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li>
-                             <a href="/#top" class="active">Home</a>
+                             <a href="/#top" class="active">หน้าหลัก</a>
                           </li>
                           {% if user.is_authenticated %}
                           <li>
-                             <a href="#">Search Data</a>
+                             <a href="#">ค้นหาข้อมูล</a>
                           </li>
                           <li>
-                             <a href="/logout/">Logout</a>
+                             <a href="/logout/">ออกจากระบบ</a>
                           </li>
                           <li>
-                             <a href="/user/{{ user_id }}/">Profile</a>
+                             <a href="/user/{{ user_id }}/">โปรไฟล์</a>
                           </li>
                           {% else %}
                           <li>
-                           <a href="/signup/">Signup</a>
+                           <a href="/signup/">ลงทะเบียน</a>
                           </li>
                           <li>
-                             <a href="/login/">Login</a>
+                             <a href="/login/">เข้าสู่ระบบ</a>
                           </li> 
                           {% endif %}
                       </ul>        

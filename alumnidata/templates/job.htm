@@ -9,17 +9,33 @@
 
                 <form method="POST" id="bigform">
                     {% csrf_token %}
-                    <input type="text" name="organization" maxlength="30" autofocus required id="id_organization" placeholder="ชื่อองค์กร">
+                    <input type="text" name="organization" maxlength="150" autofocus required id="id_organization" placeholder="ชื่อองค์กร">
                     
                     <select name="organizationType">
                       <option value="" disabled selected hidden> ประเภทองค์กร </option>
-                      <option type="text" value="individual"> เอกชน </option>
-                      <option type="text" value="state enterprise"> รัฐวิสาหกิจ </option>
-                      <option type="text" value="goverment"> หน่วยงานภาครัฐ </option>
+                      <option type="text" value="บจก"> บริษัทจำกัด </option>
+                      <option type="text" value="บมจ"> บริษัทมหาชนจำกัด </option>
+                      <option type="text" value="หจก"> ห้างหุ้นส่วนจำกัด </option>
+                      <option type="text" value="รัฐวิสาหกิจ"> รัฐวิสาหกิจ </option>
+                      <option type="text" value="ภาครัฐ"> หน่วยงานภาครัฐ </option>
+                      <option type="text" value="ธุรกิจส่วนตัว"> ธุรกิจส่วนตัว </option>
                     </select>
-  
-                    <input type="text" name="department" maxlength="30" autofocus required id="id_department" placeholder="แผนก/ฝ่าย">
-                        
+
+                    <select name="department">
+                      <option value="" disabled selected hidden> แผนก/ฝ่าย </option>
+                      <option type="text" value="administration"> บริหาร </option>
+                      <option type="text" value="finance"> การเงิน </option>
+                      <option type="text" value="accounting"> บัญชี </option>
+                      <option type="text" value="HR"> ฝ่ายบุคคล </option>
+                      <option type="text" value="IT"> ไอที </option>
+                      <option type="text" value="operations"> ออเปอเรชั่น </option>
+                      <option type="text" value="manufacture"> ฝ่ายผลิต </option>
+                      <option type="text" value="PR"> ประชาสัมพันธ์ </option>
+                      <option type="text" value="R&D"> วิจัยและพัฒนา </option>
+                      <option type="text" value="sales"> ฝ่ายขาย </option>
+                      <option type="text" value="marketing"> การตลาด </option>
+                    </select>
+
                     <input type="text" name="jobTitle" maxlength="150" id="id_jobTitle" placeholder="ตำแหน่ง">
                         
                     <textarea type="text" name="jobDesc" maxlength="255" id="id_jobDesc" placeholder="หน้าที่งาน (พอสังเขป)"></textarea>

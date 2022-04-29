@@ -72,9 +72,9 @@ class assistantDean(models.Model):
 
 class fieldstudy(models.Model):
     alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    studyField = models.CharField(max_length=50, default="#")
-    studyMajor = models.CharField(max_length=30, default="#")
-    studyMinor = models.CharField(max_length=30, default="#")
+    studyField = models.CharField(max_length=80, default="#")
+    studyMajor = models.CharField(max_length=80, default="#")
+    studyMinor = models.CharField(max_length=80, default="#")
     yearStart = models.IntegerField(default=2543)
     yearGraduate = models.IntegerField(default=2547)
     gpa = models.FloatField(max_length=4, default=3.50)
@@ -85,10 +85,10 @@ class fieldstudy(models.Model):
 
 class job(models.Model):
     alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    organization = models.CharField(max_length=30, default="#")
-    organizeType = models.CharField(max_length=10, default="#")
-    department = models.CharField(max_length=20, default="#")
-    jobTitle = models.CharField(max_length=30, default="#")
+    organization = models.CharField(max_length=255, default="#")
+    organizeType = models.CharField(max_length=255, default="#")
+    department = models.CharField(max_length=255, default="#")
+    jobTitle = models.CharField(max_length=255, default="#")
     jobDesc = models.TextField(max_length=255, default="#")
 
     def __str__(self):
@@ -97,17 +97,17 @@ class job(models.Model):
 class education(models.Model):
     alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
     degree = models.CharField(max_length=10, default="#")
-    university = models.CharField(max_length=50, default="#")
-    faculty = models.CharField(max_length=50, default="#")
-    major = models.CharField(max_length=50, default="#")
-    country = models.CharField(max_length=20, default="#")
+    university = models.CharField(max_length=255, default="#")
+    faculty = models.CharField(max_length=255, default="#")
+    major = models.CharField(max_length=255, default="#")
+    country = models.CharField(max_length=255, default="#")
 
     def __str__(self):
         return str(self.degree) + "," + str(self.university) + "," + str(self.faculty)
 
 class success(models.Model):
     alumniuser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    achieveTitle = models.CharField(max_length=50, default="#")
+    achieveTitle = models.CharField(max_length=150, default="#")
     desc = models.TextField(max_length=2000, default="#")
     achieveDate = models.DateField(max_length=10, default=date.today)
 
