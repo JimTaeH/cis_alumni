@@ -1,3 +1,4 @@
+import profile
 from django.shortcuts import render
 from logging import exception
 from unicodedata import category
@@ -6,7 +7,7 @@ from .forms import NewUserForm, UserForm
 from django.contrib import messages #import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from alumnidata.models import Profile, fieldstudy, job, education, success
+from alumnidata.models import Profile, adminList, assistantDeanList, fieldstudy, job, education, success, alumniList
 
 # Create your views here.
 def index(request):
@@ -19,12 +20,36 @@ def index(request):
 def signup(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
-		if form.is_valid():
+		first_name = request.POST['first_name']
+		last_name = request.POST['last_name']
+		if form.is_valid() and (alumniList.objects.filter(firstname=first_name).count() != 0) and (alumniList.objects.filter(lastname=last_name).count() != 0):
 			user = form.save()
 			login(request, user)
-			messages.success(request, "Registration successful." )
+			messages.success(request, "ลงทะเบียนศิษย์เก่าสำเร็จ" )
+			profile = Profile.objects.get(user=user)
+			profile.role = "alumni"
+			profile.save()
 			return redirect("/")
-		messages.error(request, "Unsuccessful registration. Invalid information.")
+		
+		elif form.is_valid() and (adminList.objects.filter(firstname=first_name).count() != 0) and (adminList.objects.filter(lastname=last_name).count() != 0):
+			user = form.save()
+			login(request, user)
+			messages.success(request, "ลงทะเบียนเจ้าหน้าที่สำเร็จ" )
+			profile = Profile.objects.get(user=user)
+			profile.role = "admin"
+			profile.save()
+			return redirect("/")
+
+		elif form.is_valid() and (assistantDeanList.objects.filter(firstname=first_name).count() != 0) and (assistantDeanList.objects.filter(lastname=last_name).count() != 0):
+			user = form.save()
+			login(request, user)
+			messages.success(request, "ลงทะเบียนผู้ช่วยคณะบดีสำเร็จ" )
+			profile = Profile.objects.get(user=user)
+			profile.role = "assistant_dean"
+			profile.save()
+			return redirect("/")
+
+		messages.error(request, "ลงทะเบียนไม่สำเร็จ ไม่พบรายชื่อในฐานข้อมูล")
 	form = NewUserForm
 	return render (request, 'signup.htm', context={"register_form":form})
 
@@ -71,15 +96,15 @@ def userpage(request, id):
 			messages.error(request,('Unable to complete request here'))
 			return redirect (f"/user/{request.user.id}/")
 
-		if 'role' in request.POST:
-			role = request.POST['role']
-			user_profile = Profile.objects.get(user=request.user)
-			user_profile.role = role
-			user_profile.save()
-			return redirect (f"/user/{request.user.id}/")
-		else:
-			messages.error(request,('Unable to update role'))
-			return redirect (f"/user/{request.user.id}/")
+		# if 'role' in request.POST:
+		# 	role = request.POST['role']
+		# 	user_profile = Profile.objects.get(user=request.user)
+		# 	user_profile.role = role
+		# 	user_profile.save()
+		# 	return redirect (f"/user/{request.user.id}/")
+		# else:
+		# 	messages.error(request,('Unable to update role'))
+		# 	return redirect (f"/user/{request.user.id}/")
 	
 	return render(request, 'userpage.htm', context)
 

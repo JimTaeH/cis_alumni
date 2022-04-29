@@ -138,3 +138,32 @@ class alumnidata(models.Model):
 
     def __str__(self):
         return str(self.alumniuser.user.first_name) + "," + str(self.alumniuser.user.last_name) + "," + str(self.alumniuser.role)
+
+class alumniList(models.Model):
+    fieldstudy = models.CharField(max_length=50, default="#")
+    yearGraduated = models.IntegerField(default=2543)
+    studentID = models.CharField(max_length=10, default="#")
+    firstname = models.CharField(max_length=50, default="#")
+    lastname = models.CharField(max_length=50, default="#")
+
+    def __str__(self):
+        return str(self.firstname) + "," + str(self.lastname) + "," + str(self.studentID)
+
+class adminList(models.Model):
+    fieldresponible = models.CharField(max_length=50, default="#")
+    adminID = models.CharField(max_length=10, default="#")
+    firstname = models.CharField(max_length=50, default="#")
+    lastname = models.CharField(max_length=50, default="#")
+    phone = models.CharField(max_length=10, default="#")
+
+    def __str__(self):
+        return str(self.firstname) + "," + str(self.lastname)
+
+class assistantDeanList(models.Model):
+    assistantDeanID = models.CharField(max_length=10, default="#")
+    firstname = models.CharField(max_length=50, default="#")
+    lastname = models.CharField(max_length=50, default="#")
+    phone = models.CharField(max_length=10, default="#")
+
+    def __str__(self):
+        return str(self.firstname) + "," + str(self.lastname)
