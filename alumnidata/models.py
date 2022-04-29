@@ -35,7 +35,15 @@ class academicadmin(models.Model):
     phone = models.CharField(max_length=10, default="0123456789")
     dob = models.DateField(max_length=10, default=date.today)
     gender = models.CharField(max_length=10, choices=gender_choices, default="#")
-    details = models.CharField(max_length=80, default="#")
+    responsible = models.CharField(max_length=50, default="#")
+
+    @receiver(post_save, sender=Profile)
+    def save_admin_profile(sender, instance, **kwargs):
+        if academicadmin.objects.filter(academicadminName=instance).count() != 0:
+            print(academicadmin.objects.get(academicadminName=instance))
+            
+        elif academicadmin.objects.filter(academicadminName=instance).count() == 0 and instance.role == 'admin':
+            academicadmin.objects.create(academicadminName=instance)
 
     def __str__(self):
         return str(self.academicadminName.user.first_name) + "," + str(self.academicadminName.user.last_name) + "," + str(self.academicadminName.role)
@@ -50,6 +58,14 @@ class assistantDean(models.Model):
     assistantDeanID = models.CharField(max_length=10, default="#", null=False)
     assistantDeanName = models.OneToOneField(Profile, on_delete=models.CASCADE)
     phone = models.CharField(max_length=10, default="0123456789")
+
+    @receiver(post_save, sender=Profile)
+    def save_dean_profile(sender, instance, **kwargs):
+        if assistantDean.objects.filter(assistantDeanName=instance).count() != 0:
+            print(assistantDean.objects.get(assistantDeanName=instance))
+            
+        elif assistantDean.objects.filter(assistantDeanName=instance).count() == 0 and instance.role == 'assistant_dean':
+            assistantDean.objects.create(assistantDeanName=instance)
 
     def __str__(self):
         return str(self.assistantDeanName.user.first_name) + "," + str(self.assistantDeanName.user.last_name) + "," + str(self.assistantDeanName.role)
@@ -116,9 +132,6 @@ class alumnidata(models.Model):
     def save_alumni_profile(sender, instance, **kwargs):
         if alumnidata.objects.filter(alumniuser=instance).count() != 0:
             print(alumnidata.objects.get(alumniuser=instance))
-
-        elif instance.role != 'alumni':
-            print("Not alumni account")
             
         elif alumnidata.objects.filter(alumniuser=instance).count() == 0 and instance.role == 'alumni':
             alumnidata.objects.create(alumniuser=instance)

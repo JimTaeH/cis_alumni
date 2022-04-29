@@ -10,9 +10,14 @@
                   {% csrf_token %}
                   <select name="studyField">
                     <option value="" disabled selected hidden> ระบุสาขาวิชา </option>
+                    <option type="text" value="MA"> ปริญญาโท สตรี เพศสถานะ และเพศวิถีศึกษา (MA) </option>
                     <option type="text" value="DSI"> วิทยาศาสตรบัณฑิต สาขาวิชาวิทยาศาสตร์และนวัตกรรมข้อมูล (DSI) </option>
+                    <option type="text" value="SI-LP"> ปริญญาตรีสหวิทยาการสังคมศาสตร์ (SI ลำปาง) </option>
+                    <option type="text" value="PhD-IntegratedScience"> ปริญญาเอกสหวิทยาการ Ph.D. (Integrated Science) </option>
+                    <option type="text" value="TUFT"> ปริญญาตรีหลักสูตร TU FRONTIER SCHOOL (ศูนย์รังสิต) </option>
                     <option type="text" value="PPE-TP"> สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์ (PPE ท่าพระจันทร์) </option>
                     <option type="text" value="PPE-LP"> สาขาวิชาปรัชญา การเมือง และเศรษฐศาสตร์ (PPE ลำปาง) </option>
+                    <option type="text" value="PPE-INTER-TP"> ปริญญาตรีปรัชญา การเมือง เศรษฐศาสตร์ หลักสูตรนานาชาติ (PPE International Program) </option>
                   </select>
 
                   <input type="text" name="major" maxlength="30" autofocus required id="id_major" placeholder="ระบุวิชาเอก">
