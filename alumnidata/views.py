@@ -325,23 +325,67 @@ def achievement_page(request, id):
 	return render(request, 'achievement.htm', context)
 
 def searchdata_page(request):
+
 	if 'job' in request.GET:
 		df = load_job()
 		chart = piechart(data=df, val=list(df.Type.value_counts().values), labels=list(df.Type.unique()))
+		jobs = job.objects.all()
+		user_role = Profile.objects.get(user=request.user)
+		context = {
+		'user_id': request.user.id,
+		'plot_div': chart,
+		'jobs': jobs,
+		'check': request.GET,
+		'user_role': user_role
+		}
+
 	elif 'fofs' in request.GET:
 		df = load_fieldstudy()
 		chart = piechart(data=df, val=list(df.studyField.value_counts().values), labels=list(df.studyField.unique()))
+		fofs = fieldstudy.objects.all()
+		user_role = Profile.objects.get(user=request.user)
+		context = {
+		'user_id': request.user.id,
+		'plot_div': chart,
+		'fofs': fofs,
+		'check': request.GET,
+		'user_role': user_role
+		}
+
 	elif 'education' in request.GET:
 		df = load_education()
 		chart = piechart(data=df, val=list(df.university.value_counts().values), labels=list(df.university.unique()))
+		educations = education.objects.all()
+		user_role = Profile.objects.get(user=request.user)
+		context = {
+		'user_id': request.user.id,
+		'plot_div': chart,
+		'educations': educations,
+		'check': request.GET,
+		'user_role': user_role
+		}
+
 	elif 'success' in request.GET:
 		df = load_success()
 		chart = piechart(data=df, val=list(df.achieveTitle.value_counts().values), labels=list(df.achieveTitle.unique()))
-	else:
-		chart = None
-
-	context = {
+		successes = success.objects.all()
+		user_role = Profile.objects.get(user=request.user)
+		context = {
 		'user_id': request.user.id,
 		'plot_div': chart,
-	}
+		'successes': successes,
+		'check': request.GET,
+		'user_role': user_role
+		}
+
+	else:
+		chart = None
+		user_role = Profile.objects.get(user=request.user)
+		context = {
+			'user_id': request.user.id,
+			'plot_div': chart,
+			'check': request.GET,
+			'user_role': user_role
+		}
+		
 	return render(request, 'searchdata.htm', context)

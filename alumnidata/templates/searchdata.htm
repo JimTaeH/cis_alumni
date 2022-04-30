@@ -4,19 +4,154 @@
 
 <section class="contact-us" id="signup">
     <div class="container">
-      <div class="row">
+      {% if user_role.role == "alumni" or user_role == "admin" or user_role == "assistant_dean" %}
+        <h2 class="form-title"> ข้อมูลการทำงาน </h2>
         <form method="get" id="bigform">
           {% csrf_token %}
-          <button name="job" type="submit" value="job"> ข้อมูลการทำงานของศิษย์เก่า </button>
-          <button name="fofs" type="submit" value="fofs"> ข้อมูลประวัติการศึกษาของศิษย์เก่า </button>
-          <button name="education" type="submit" value="education"> ข้อมูลการเรียนต่อของศิษย์เก่า </button>
-          <button name="success" type="submit" value="success"> ข้อมูลผลงานความสำเร็จของศิษย์เก่า </button>
+          <button name="job" type="submit" value="job"> แยกตามประเภทองค์กร </button>
         </form>
-      </div>
-      <br>
+        <br>
+        <h2 class="form-title"> ประวัติการศึกษา </h2>
+        <form method="get" id="bigform">
+          {% csrf_token %}
+          <button name="fofs" type="submit" value="fofs"> แยกตามสาขาที่ศึกษา </button>
+        </form>
+        <br>
+        <h2 class="form-title"> ข้อมูลการเรียนต่อ </h2>
+        <form method="get" id="bigform">
+          {% csrf_token %}
+          <button name="education" type="submit" value="education"> แยกตามมหาวิทยาลัย </button>
+        </form>
+        <br>
+        <h2 class="form-title"> ข้อมูลผลงานความสำเร็จ </h2>
+        <form method="get" id="bigform">
+          {% csrf_token %}
+          <button name="success" type="submit" value="success"> แยกตามผลงานที่ได้รับ </button>
+        </form>
+        <br>
+      {% else %}
+        <h2 class="form-title"> ไม่มีสิทธิ์ในการเข้าถึงข้อมูลในส่วนนี้ </h2>
+      {% endif %}
+      {% if 'job' in check %}
+      <h4 class="form-title"> กราฟแยกตามประเภทองค์กร </h4>
       {% autoescape off %}
         {{ plot_div }}
       {% endautoescape %}
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col"> ชื่อจริง </th>
+            <th scope="col"> ชื่อองค์กร </th>
+            <th scope="col"> ประเภท </th>
+            <th scope="col"> แผนก/ฝ่าย </th>
+            <th scope="col"> ตำแหน่ง </th>
+            <th scope="col"> หน้าที่งาน </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in jobs %}
+          <tr>
+            <th scope="row"> {{ job.alumniuser.user.first_name }} </th>
+            <td>{{ job.organization }}</td>
+            <td>{{ job.organizeType }}</td>
+            <td>{{ job.department }}</td>
+            <td>{{ job.jobTitle }}</td>
+            <td>{{ job.jobDesc }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% elif 'fofs' in check %}
+      <h4 class="form-title"> ประวัติการศึกษาแยกตามสาขาวิชา </h4>
+      {% autoescape off %}
+        {{ plot_div }}
+      {% endautoescape %}
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col"> ชื่อจริง </th>
+            <th scope="col"> สาขาวิชา </th>
+            <th scope="col"> วิชาเอก </th>
+            <th scope="col"> วิชาโท </th>
+            <th scope="col"> ปีที่เข้า </th>
+            <th scope="col"> ปีที่จบ </th>
+            <th scope="col"> เกรดเฉลี่ย </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for field in fofs %}
+          <tr>
+            <th scope="row"> {{ field.alumniuser.user.first_name }} </th>
+            <td>{{ field.studyField }}</td>
+            <td>{{ field.studyMajor }}</td>
+            <td>{{ field.studyMinor }}</td>
+            <td>{{ field.yearStart }}</td>
+            <td>{{ field.yearGraduate }}</td>
+            <td>{{ field.gpa }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% elif 'education' in check %}
+      <h4 class="form-title"> กราฟข้อมูลการเรียนต่อแยกตามมหาวิทยาลัย </h4>
+      {% autoescape off %}
+        {{ plot_div }}
+      {% endautoescape %}
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col"> ชื่อจริง </th>
+            <th scope="col"> ระดับการศึกษา </th>
+            <th scope="col"> มหาวิทยาลัย </th>
+            <th scope="col"> สาขาวิชา </th>
+            <th scope="col"> วิชาเอก </th>
+            <th scope="col"> ประเทศ </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for education in educations %}
+          <tr>
+            <th scope="row"> {{ education.alumniuser.user.first_name }} </th>
+            <td>{{ education.degree }}</td>
+            <td>{{ education.university }}</td>
+            <td>{{ education.faculty }}</td>
+            <td>{{ education.major }}</td>
+            <td>{{ education.country }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% elif 'success' in check %}
+      <h4 class="form-title"> กราฟผลงานแยกตามชื่อผลงาน </h4>
+      {% autoescape off %}
+        {{ plot_div }}
+      {% endautoescape %}
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col"> ชื่อจริง </th>
+            <th scope="col"> รางวัล/ผลงาน </th>
+            <th scope="col"> รายละเอียด </th>
+            <th scope="col"> วันที่ได้รับผลงาน </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for succeed in successes %}
+          <tr>
+            <th scope="row"> {{ succeed.alumniuser.user.first_name }} </th>
+            <td>{{ succeed.achieveTitle }}</td>
+            <td>{{ succeed.desc }}</td>
+            <td>{{ succeed.achieveDate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+
+    <div class="footer">
+      <p>Copyright © 2022 Edu Meeting Co., Ltd. All Rights Reserved. 
+          <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
     </div>
   </section>
 
