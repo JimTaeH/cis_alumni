@@ -1,3 +1,23 @@
 {% extends 'base.htm' %}
+{% load static %}
 {% block section1 %}
+
+<section class="contact-us" id="signup">
+    <div class="container">
+      <div class="row">
+        <form method="get" id="bigform">
+          {% csrf_token %}
+          <button name="job" type="submit" value="job"> ข้อมูลการทำงานของศิษย์เก่า </button>
+          <button name="fofs" type="submit" value="fofs"> ข้อมูลประวัติการศึกษาของศิษย์เก่า </button>
+          <button name="education" type="submit" value="education"> ข้อมูลการเรียนต่อของศิษย์เก่า </button>
+          <button name="success" type="submit" value="success"> ข้อมูลผลงานความสำเร็จของศิษย์เก่า </button>
+        </form>
+      </div>
+      <br>
+      {% autoescape off %}
+        {{ plot_div }}
+      {% endautoescape %}
+    </div>
+  </section>
+
 {% endblock %}
