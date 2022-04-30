@@ -87,13 +87,35 @@ def userpage(request, id):
 
 	if request.method == "POST":
 		user_form = UserForm(request.POST, instance=request.user)
+		first_name = request.POST['first_name']
+		last_name = request.POST['last_name']
 
-		if user_form.is_valid():
+		if user_form.is_valid() and (alumniList.objects.filter(firstname=first_name).count() != 0) and (alumniList.objects.filter(lastname=last_name).count() != 0):
 			user_form.save()
-			messages.success(request,('Your profile was successfully updated!'))
+			profile = Profile.objects.get(user=request.user)
+			profile.role = "alumni"
+			profile.save()
+			messages.success(request,('ยืนยันตัวตนศิษย์เก่าเรียบร้อย'))
+			return redirect (f"/user/{request.user.id}/")
+		
+		elif user_form.is_valid() and (adminList.objects.filter(firstname=first_name).count() != 0) and (adminList.objects.filter(lastname=last_name).count() != 0):
+			user_form.save()
+			profile = Profile.objects.get(user=request.user)
+			profile.role = "admin"
+			profile.save()
+			messages.success(request,('ยืนยันตัวตนเจ้าหน้าที่เรียบร้อย'))
+			return redirect (f"/user/{request.user.id}/")
+		
+		elif user_form.is_valid() and (assistantDeanList.objects.filter(firstname=first_name).count() != 0) and (assistantDeanList.objects.filter(lastname=last_name).count() != 0):
+			user_form.save()
+			profile = Profile.objects.get(user=request.user)
+			profile.role = "assistant_dean"
+			profile.save()
+			messages.success(request,('ยืนยันตัวตนผู้ช่วยคณะบดีเรียบร้อย'))
+			return redirect (f"/user/{request.user.id}/")
 			
 		else:
-			messages.error(request,('Unable to complete request here'))
+			messages.error(request,('ไม่พบข้อมูล ไม่สามารถยืนยันตัวตนได้'))
 			return redirect (f"/user/{request.user.id}/")
 
 		# if 'role' in request.POST:
@@ -300,3 +322,6 @@ def achievement_page(request, id):
 			return redirect (f"/achievement/{request.user.id}/")
 
 	return render(request, 'achievement.htm', context)
+
+def searchdata_page(request):
+	return render(request, 'searchdata.htm')
