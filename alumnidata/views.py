@@ -328,7 +328,7 @@ def searchdata_page(request):
 
 	if 'job' in request.GET:
 		df = load_job()
-		chart = piechart(data=df, val=list(df.Type.value_counts().values), labels=list(df.Type.unique()))
+		chart = piechart(data=df, val=list(df.Type.value_counts().values), labels=list(df.Type.value_counts().index.values))
 		jobs = job.objects.all()
 		user_role = Profile.objects.get(user=request.user)
 		context = {
@@ -341,7 +341,7 @@ def searchdata_page(request):
 
 	elif 'fofs' in request.GET:
 		df = load_fieldstudy()
-		chart = piechart(data=df, val=list(df.studyField.value_counts().values), labels=list(df.studyField.unique()))
+		chart = piechart(data=df, val=list(df.studyField.value_counts().values), labels=list(df.studyField.value_counts().index.values))
 		fofs = fieldstudy.objects.all()
 		user_role = Profile.objects.get(user=request.user)
 		context = {
@@ -354,7 +354,7 @@ def searchdata_page(request):
 
 	elif 'education' in request.GET:
 		df = load_education()
-		chart = piechart(data=df, val=list(df.university.value_counts().values), labels=list(df.university.unique()))
+		chart = piechart(data=df, val=list(df.university.value_counts().values), labels=list(df.university.value_counts().index.values))
 		educations = education.objects.all()
 		user_role = Profile.objects.get(user=request.user)
 		context = {
@@ -367,7 +367,7 @@ def searchdata_page(request):
 
 	elif 'success' in request.GET:
 		df = load_success()
-		chart = piechart(data=df, val=list(df.achieveTitle.value_counts().values), labels=list(df.achieveTitle.unique()))
+		chart = piechart(data=df, val=list(df.achieveTitle.value_counts().values), labels=list(df.achieveTitle.value_counts().index.values))
 		successes = success.objects.all()
 		user_role = Profile.objects.get(user=request.user)
 		context = {
