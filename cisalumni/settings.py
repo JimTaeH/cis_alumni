@@ -39,7 +39,7 @@ with open(os.path.join(BASE_DIR, 'secretskey.txt')) as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cisalum9.herokuapp.com']
 
 
 # Application definition
