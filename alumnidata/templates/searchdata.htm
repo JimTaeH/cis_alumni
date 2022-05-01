@@ -4,7 +4,7 @@
 
 <section class="contact-us" id="signup">
     <div class="container">
-      {% if user_role.role == "alumni" or user_role == "admin" or user_role == "assistant_dean" %}
+      {% if user_role.role == "alumni" or user_role.role == "admin" or user_role.role == "assistant_dean" %}
         <h2 class="form-title"> ข้อมูลการทำงาน </h2>
         <form method="get" id="bigform">
           {% csrf_token %}
