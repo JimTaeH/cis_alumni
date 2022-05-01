@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
+from django.conf.urls import url
+from django.conf import settings
 
 urlpatterns = [
+    url(r'^alumnidata/static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+
     path('admin/', admin.site.urls),
     path('', include('alumnidata.urls')),
     path('accounts/', include('allauth.urls')),
