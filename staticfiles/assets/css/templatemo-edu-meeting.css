@@ -31,7 +31,7 @@ font & reset css
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 @font-face {
   font-family: 'TUreg';
-  src: url("/staticfiles/assets/fonts/TUFont.ttf");
+  src: url("/static/assets/fonts/tufont-webfont.woff");
 }
 /* 
 ---------------------------------------------
