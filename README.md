@@ -1,8 +1,8 @@
 # Alum9 (CIS Alumni Service System) ระบบศิษย์เก่าวิทยาลัยสหวิทยาการ
 คู่มือสำหรับติดตั้งระบบ Alum9 พร้อมวิธีการติดตั้ง Database โดยมีหัวข้อดังนี้
-* [Prerequisite](https://github.com/JimTaeH/cis_alumni/edit/main/README.md#prerequisite)
-* [Deploy with Heroku Git on CMD Prompt](https://github.com/JimTaeH/cis_alumni/edit/main/README.md#deploy-with-heroku-git-on-cmd-prompt)
-* [Migrate Heroku PostgreSQL](https://github.com/JimTaeH/cis_alumni/edit/main/README.md#migrate-heroku-postgresql)
+* [Prerequisite](https://github.com/JimTaeH/cis_alumni/main/README.md#prerequisite)
+* [Deploy with Heroku Git on CMD Prompt](https://github.com/JimTaeH/cis_alumni/main/README.md#deploy-with-heroku-git-on-cmd-prompt)
+* [Migrate Heroku PostgreSQL](https://github.com/JimTaeH/cis_alumni/main/README.md#migrate-heroku-postgresql)
 
 ## Prerequisite
 การ Deploy บน Heroku จำเป็นจะต้องมี
