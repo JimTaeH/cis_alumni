@@ -7,7 +7,7 @@
 ## Prerequisite
 การ Deploy บน Heroku จำเป็นจะต้องมี
 1. บัญชีสำหรับเข้าใช้งาน Heroku โดยสมัครได้ที่นี่ [Heroku Signup](https://signup.heroku.com/)
-2. มีการ Create App ไว้บน Heroku แล้ว ขั้นตอนนี้เพียงแค่ Login เข้าไปในเว็บ Heroku และกดสร้างผ่านหน้า UI ได้ง่าย ๆ ทันที
+2. มีการ Create App ไว้บน Heroku แล้ว ขั้นตอนนี้เพียงแค่ Login เข้าไปในเว็บ Heroku และกดสร้างผ่านหน้า UI ได้ทันที
 3. ติดตั้ง Heroku PostgreSQL บน App ที่สร้าง ติดตั้งที่นี่ [Heroku PostgresSQL](https://elements.heroku.com/addons/heroku-postgresql)
 4. ติดตั้ง Heroku CLI ดาวน์โหลดได้ที่นี่ [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 5. เตรียมไฟล์ secretskey.txt ของตัวเองไว้ โดยใส่ไว้ในระดับเดียวกันกับพวก requirements.txt
