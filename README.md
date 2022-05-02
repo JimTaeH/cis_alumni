@@ -9,5 +9,6 @@
 1. บัญชีสำหรับเข้าใช้งาน Heroku โดยสมัครได้ที่นี่ [Heroku Signup](https://signup.heroku.com/)
 2. มีการ Create App ไว้บน Heroku แล้ว ขั้นตอนนี้เพียงแค่ Login เข้าไปในเว็บ Heroku และกดสร้างผ่านหน้า UI ได้ง่าย ๆ ทันที
 3. ติดตั้ง Heroku CLI ดาวน์โหลดได้ที่นี่ [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+4. เตรียมไฟล์ secretskeys.txt ของตัวเองไว้ โดยใส่ไว้ในตำแหน่งเดียวกันกับพวก requirements.txt
 ## Deploy with Heroku Git on CMD Prompt
 ## Migrate Heroku PostgreSQL
