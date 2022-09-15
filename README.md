@@ -1,6 +1,6 @@
 # Alum9 (CIS Alumni Service System) ระบบศิษย์เก่าวิทยาลัยสหวิทยาการ
-* [Visit Website](https://cisalum9.herokuapp.com/)
 คู่มือสำหรับติดตั้งระบบ Alum9 พร้อมวิธีการติดตั้ง Database โดยมีหัวข้อดังนี้
+* [Visit Website](https://cisalum9.herokuapp.com/)
 * [Prerequisite](https://github.com/JimTaeH/cis_alumni/#prerequisite)
 * [Deploy with Heroku Git on CMD Prompt](https://github.com/JimTaeH/cis_alumni/#deploy-with-heroku-git-on-cmd-prompt)
 * [Migrate Heroku PostgreSQL](https://github.com/JimTaeH/cis_alumni/#migrate-heroku-postgresql)
